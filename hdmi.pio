@@ -1,0 +1,21 @@
+; hdmi.pio - PIO para geração de sinais HDMI básicos (RGB 3 bits + CLK)
+
+.program hdmi_rgb3
+    pull block           ; Aguarda dados do padrão (3 bits RGB)
+    out pins, 3          ; Envia 3 bits (D0, D1, D2)
+.wrap
+
+% c-sdk {
+// Função de inicialização do PIO HDMI
+void hdmi_rgb3_program_init(PIO pio, uint sm, uint offset, uint pin_base) {
+    pio_gpio_init(pio, pin_base);
+    pio_gpio_init(pio, pin_base+1);
+    pio_gpio_init(pio, pin_base+2);
+    pio_sm_set_consecutive_pindirs(pio, sm, pin_base, 3, true);
+    pio_sm_config c = hdmi_rgb3_program_get_default_config(offset);
+    sm_config_set_out_pins(&c, pin_base, 3);
+    sm_config_set_set_pins(&c, pin_base, 3);
+    sm_config_set_clkdiv(&c, 2.3148f); // 125 MHz / 2.3148 = 54 MHz, clock real = 27 MHz (duas instruções por ciclo)
+    pio_sm_init(pio, sm, offset, &c);
+}
+%}

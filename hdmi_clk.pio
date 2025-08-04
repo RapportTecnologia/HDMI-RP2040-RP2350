@@ -1,0 +1,18 @@
+; hdmi_clk.pio - Gera um clock quadrado para HDMI
+
+.program hdmi_clk
+    set pins, 1 [31]   ; Sobe o clock (1 ciclo)
+    set pins, 0 [31]   ; Desce o clock (1 ciclo)
+.wrap
+
+% c-sdk {
+// Inicializa o PIO para gerar clock HDMI
+void hdmi_clk_program_init(PIO pio, uint sm, uint offset, uint clk_pin) {
+    pio_gpio_init(pio, clk_pin);
+    pio_sm_set_consecutive_pindirs(pio, sm, clk_pin, 1, true);
+    pio_sm_config c = hdmi_clk_program_get_default_config(offset);
+    sm_config_set_set_pins(&c, clk_pin, 1);
+    sm_config_set_clkdiv(&c, 2.3148f); // 125 MHz / 2.3148 = 54 MHz, clock real = 27 MHz (duas instruções por ciclo)
+    pio_sm_init(pio, sm, offset, &c);
+}
+%}
