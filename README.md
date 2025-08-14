@@ -44,3 +44,27 @@ Documentar e padronizar a conexão dos pinos para facilitar a montagem e o desen
 ---
 
 Se precisar adicionar mais detalhes, diagramas ou instruções, é só pedir!
+
+## Dependência OLED
+
+Este projeto utiliza o driver OLED do repositório externo clonado como submódulo no raiz do workspace:
+
+- Diretório: `../OLED_SSD1306/`
+- Repositório: `git@github.com:RapportTecnologia/OLED_SSD1306-RP2040-RP2350.git`
+
+Os arquivos fonte `oled.c` e `ssd1306_i2c.c` são referenciados diretamente do submódulo pelo `CMakeLists.txt` deste projeto. Os cabeçalhos (`oled.h`, `ssd1306_i2c.h`, etc.) também são incluídos a partir desse diretório.
+
+## Como compilar
+
+Para evitar conflitos com caches antigos, gere um diretório de build dedicado:
+
+```bash
+cmake -S . -B build
+cmake --build build -j
+```
+
+Caso esteja configurando do zero no workspace raiz, inicialize/atualize submódulos antes de compilar:
+
+```bash
+git submodule update --init --recursive
+```
