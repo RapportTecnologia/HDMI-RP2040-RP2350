@@ -37,8 +37,8 @@ pico_sdk_init()
 
 add_executable(Adaptador_HDMI
     main.c
-    inc/oled/oled.c
-    inc/oled/ssd1306_i2c.c
+    lib/oled_ssd1306/oled.c
+    lib/oled_ssd1306/ssd1306_i2c.c
 )
 
 pico_set_program_name(Adaptador_HDMI "Adaptador_HDMI")
@@ -59,7 +59,7 @@ target_link_libraries(Adaptador_HDMI
 # Add the standard include files to the build
 target_include_directories(Adaptador_HDMI PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
-        ${CMAKE_CURRENT_LIST_DIR}/inc/oled
+        ${CMAKE_CURRENT_LIST_DIR}/lib/oled_ssd1306
 )
 
 # Add any user requested libraries

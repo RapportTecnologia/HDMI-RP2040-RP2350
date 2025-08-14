@@ -1,3 +1,0 @@
-[submodule "inc/oled"]
-	path = inc/oled
-	url = git@github.com:arvoredossaberes/oled_ssd1306.git
