@@ -2,6 +2,10 @@
 
 Este projeto descreve a pinagem e documentação para conexão de um microcontrolador ao conector HDMI, visando facilitar o desenvolvimento e montagem do adaptador.
 
+## Visão Geral
+
+Exemplos e documentação de referência para saída de vídeo (HDMI/LVDS) com RP2040/RP2350. Inclui pinagem, CI diferencial (DS90LV027A) e dependências (ex.: driver OLED para OSD/depuração).
+
 ## Como obter este módulo (via workspace principal)
 
 Para garantir todas as dependências (ex.: drivers comuns e bibliotecas em outros diretórios do workspace), recomenda-se clonar o repositório raiz (monorepo) com submódulos:
@@ -23,6 +27,17 @@ Caso esteja configurando do zero no workspace raiz, inicialize/atualize submódu
 ```bash
 cmake -S . -B build
 cmake --build build -j
+```
+
+## Estrutura do projeto
+
+```
+HDMI-RP2040-RP2350/
+├─ CMakeLists.txt
+├─ docs/
+│  └─ README.md
+├─ src/ (quando aplicável)
+└─ dependências: ../OLED_SSD1306-RP2040-RP2350
 ```
 
 ## Pinagem Utilizada
