@@ -2,6 +2,29 @@
 
 Este projeto descreve a pinagem e documentação para conexão de um microcontrolador ao conector HDMI, visando facilitar o desenvolvimento e montagem do adaptador.
 
+## Como obter este módulo (via workspace principal)
+
+Para garantir todas as dependências (ex.: drivers comuns e bibliotecas em outros diretórios do workspace), recomenda-se clonar o repositório raiz (monorepo) com submódulos:
+
+```bash
+git clone --recurse-submodules https://github.com/RapportTecnologia/Sensores_e_Atuadores_do_Kit_BitDogLab.git Sensores_e_Atuadores_do_KIT
+cd Sensores_e_Atuadores_do_KIT
+git submodule update --init --recursive
+```
+
+Para atualizar submódulos para suas últimas revisões (quando configurado):
+
+```bash
+git submodule update --remote --merge --recursive
+```
+
+Caso esteja configurando do zero no workspace raiz, inicialize/atualize submódulos antes de compilar:
+
+```bash
+cmake -S . -B build
+cmake --build build -j
+```
+
 ## Pinagem Utilizada
 
 | Nº | Pino     | Função/Descrição   |
